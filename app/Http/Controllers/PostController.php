@@ -75,7 +75,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        dd($post->image);
+        
         $post = Post::find($id);
         $categories=Category::pluck('name','id');
 

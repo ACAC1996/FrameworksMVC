@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $category->name ?? "{{ __('Ver') Categoría" }}
+    {{ $category->name ?? __('Ver')}} Categoría
 @endsection
 
 @section('content')
