@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Rol;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Reply;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 /**
@@ -35,7 +37,8 @@ class PostController extends Controller
     {
         $post = new Post();
         $categories=Category::pluck('name','id');
-        return view('post.create', compact('post','categories'));
+        $users=User::pluck('name','id');
+        return view('post.create', compact('post','categories','users'));
     }
 
     /**
@@ -78,8 +81,9 @@ class PostController extends Controller
         
         $post = Post::find($id);
         $categories=Category::pluck('name','id');
-
-        return view('post.edit', compact('post','categories'));
+        $users=User::pluck('name','id');
+        $replies=Reply::pluck('respuesta','id');
+        return view('post.edit', compact('post','categories','users'));
     }
 
     /**

@@ -14,8 +14,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property $state
  * @property $created_at
  * @property $updated_at
+ * @property $autor_id
  *
  * @property Category $category
+ * @property User $user
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -33,7 +35,7 @@ class Post extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','category_id','description','state'];
+    protected $fillable = ['name','category_id','description','state','autor_id'];
 
 
     /**
@@ -42,6 +44,16 @@ class Post extends Model
     public function category()
     {
         return $this->hasOne('App\Models\Category', 'id', 'category_id');
+    }
+
+    public function user()
+    {
+      return $this->hasOne('App\Models\User','id','autor_id');
+    }
+    
+    public function replies()
+    {
+      return $this->hasMany('App\Models\Reply');
     }
 
     public function image(){

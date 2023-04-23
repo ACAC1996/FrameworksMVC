@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100)->nullable()->default('text');
-            $table->unsignedBiginteger('category_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->text('description')->nullable();
             $table->enum('state',['no_post','post']);
+            $table->unsignedBigInteger('autor_id')->nullable();
+            $table->foreign('autor_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

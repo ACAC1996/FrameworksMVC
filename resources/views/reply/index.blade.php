@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Post
+    Reply
 @endsection
 
 @section('content')
@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Post') }}
+                                {{ __('Reply') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('posts.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Nuevo Post') }}
+                                <a href="{{ route('replies.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Create New') }}
                                 </a>
                               </div>
                         </div>
@@ -36,35 +36,27 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Nombre</th>
-										<th>Categoría</th>
-										<th>Descripción</th>
-										<th>Estado publicación</th>
-                                        <th>Autor</th>
+										<th>Post Id</th>
+										<th>Respuesta</th>
+
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($posts as $post)
+                                    @foreach ($replies as $reply)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $post->name }}</td>
-											<td>{{ $post->category->name }}</td>
-											<td>{{ $post->description }}</td>
-											<td>{{ $post->state }}</td>
-                                            <td>{{ $post->user->name }}</td>
+											<td>{{ $reply->post->name }}</td>
+											<td>{{ $reply->respuesta }}</td>
+
                                             <td>
-                                                <form action="{{ route('posts.destroy',$post->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('posts.show',$post->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('posts.edit',$post->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Actualizar') }}</a>
-                                                    <a class="btn btn-sm btn-secondary" href="{{ route('replies.store',$post->name) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Respuestas') }}</a>
+                                                <form action="{{ route('replies.destroy',$reply->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('replies.show',$reply->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('replies.edit',$reply->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" ><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
-                                            
-                                                    
-
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -74,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $posts->links() !!}
+                {!! $replies->links() !!}
             </div>
         </div>
     </div>

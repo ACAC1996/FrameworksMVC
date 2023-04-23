@@ -25,6 +25,11 @@
             </select>
             {!! $errors->first('state', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        <div class="form-group">
+            {{ Form::label('autor_id') }}
+            {{ Form::select('autor_id',$users, Auth::id(), ['class' => 'form-control' . ($errors->has('autor_id') ? ' is-invalid' : ''), 'placeholder' => 'Autor Id']) }}
+            {!! $errors->first('autor_id', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
 
     </div>
     <div class="box-footer mt20">
